@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step08_Array2.html</title>
+</head>
+<body>
+    <h1>배열 객체의 다양한 함수 활용</h1>
+    <script>
+        const names=["김구라","해골","원숭이"]
+        //위의 배열에 저장된 이름 뒤에 "님"을 모두 붙여보세요
+        for(let i=0; i<names.length; i++){
+            names[i]+="님"
+        }
+
+        const original=["김구라","해골","원숭이"]
+        //원본 배열의 아이템을 활용해서 새로운 배열을 얻어내는  map() 함수
+        const newArray=original.map((item)=>{
+            console.log("호출됨:"+item)
+            return item+"님";
+        })
+        //로직이 간단한 경우에 1줄짜리 함수(람다함수) 로 작성할 수 있다.
+        const newArray2 = original.map(item => item+"님")
+
+        const nums=[1,5,8,-10,-20,10,30]
+        // nums 배열에 저장된 아이템을 이용해서
+        // 1. 음수를 제외(filter)
+        // 2. 양수의 제곱으로 구성된 새로운 배열을 얻어내 보세요. (map)
+        
+        const arrayA = nums.filter((item)=>{
+            return item>=0;
+        }).map((item)=>{
+            return item*item;
+        })
+        
+    
+    </script>
+    
+</body>
+</html>
