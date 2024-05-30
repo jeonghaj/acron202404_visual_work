@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>특정시간을 주기로 어떤 작업을 반복하기</h1>
+    <p id="one">0</p>
+    <button id="startBtn">시작</button>
+    <button id="cancelBtn">취소</button>
+    <script>
+        //전역변수 안만드는법 = 함수를 만들자마자 호출 => 안에서 생성
+        (function(){
+
+         //페이지 로딩 시점에 count 변수 만들어서 초기값 0 대입
+        let count = 0
+        // Interval 의 아이디를 담을 변수를 미리 만들어 둔다.
+        let intervaId
+        // Interval 의 상태값을 관리할 변수 만들고 초기값 부여
+        let IsRunning = false;
+
+        //시작 버튼을 눌렀을 떄 실행할 함수 등록
+        document.querySelector("#startBtn").addEventListener("click",()=>{
+            //만일 현재 interval 이 진행중이면
+            if(IsRunning){
+                return // 함수를 여기서 끝내라!
+            }
+            // 진행중이 아니라면 다음 버튼에 진행되는걸 막기위해 설정
+            IsRunning = true;
+            // 1초 주기로 호출되는 함수 등록
+            // intervalId = 누를때마다 시퀀스 쌓이는것처럼 숫자가 늘어남
+            intervalId = setInterval(()=>{ 
+                count++
+                document.querySelector("#one").innerText = count
+            },1000);
+        })
+
+        document.querySelector("#cancelBtn").addEventListener("click",()=>{
+            clearInterval(intervalId)
+            IsRunning = false; // 다시 시작을 누르면 시작되도록 세팅
+            count = 0 // 취소시에 리셋
+            document.querySelector("#one").innerText = count // p요소도 리셋
+        });
+
+        })()
+          
+        
+        
+    </script>
+</body>
+</html>

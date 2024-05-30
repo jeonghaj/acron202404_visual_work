@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step09_Interval.html</title>
+</head>
+<body>
+    <h1>특정시간을 주기로 어떤 작업을 반복하기</h1>
+    <p id="one">0</p>
+    <script>
+        let count=0;
+        //setInterval(함수,호출주기)
+        setInterval(()=>{
+            console.log("호출됨!")
+            count++
+            document.querySelector("#one").innerText = count
+        },1000);
+
+    </script>
+</body>
+</html>
