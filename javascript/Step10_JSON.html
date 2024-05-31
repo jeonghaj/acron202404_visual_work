@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_JSON.html</title>
+</head>
+<body>
+    <div class="container">
+        <h1>문자열 사용해 보기</h1>
+        <p>
+            <strong>Java Script Object Notation</strong> (자바스크립트 객체 표기법)
+            을 따르는 문자열을 JSON 문자열이라고 한다.
+        </p>
+    </div>
+    <script>
+        /*
+        JSON 문자열 작성법
+        - key 값은 반드시 더블 따옴표 (double quotation) 으로 감싸야한다.
+        - value 로 작성할 수 있는 형식은
+        1. 숫자
+        2. 문자 => 반드시 double quotation
+        3. 논리 => true or false
+        4. 빈값 => null
+        5. array => []
+        6. object => {}
+
+        */
+        
+        //object type
+        const data1={num:1, name:"김구라"}
+        //strig type
+        const data2='{"num":2, "name":"해골"}'
+        //위의 JSON 문자열을 이용해서 object 얻어내기
+        const result2 = JSON.parse(data2)
+        //array type
+        const data3 = [10,20,30]
+        //string type
+        const data4 = '[10,20,30]'
+        //위의 JSON 문자열을 이용해서 array 얻어내기
+        const result4 = JSON.parse(data4)
+        //한명의 정보를 담고있는 JSON 형식의 문자열 // backtick  이용
+        const info=`
+        {
+            "num":1,
+            "name":"김구라",
+            "isMan":true,
+            "addr":null,
+            "friends":["해골","원숭이","주뎅이"],
+            "company":{
+                "name":"에이콘 아카데미",
+                "addr":"강남역"
+            }
+        }
+        `
+
+        //JSON 문자열을 이용해서 object 얻어내기
+        const result = JSON.parse(info)
+        let a = result.num //1
+        let b = result.name //김구라
+        let c = result.isMan //true
+        let d = result.addr //null
+        let e = result.friends //[]
+        let f = result.company //{}
+
+        
+    </script>
+</body>
+</html>

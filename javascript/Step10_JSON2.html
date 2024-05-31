@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_JSON2.html</title>
+</head>
+<body>
+    <button id="printBtn">출력하기</button>
+    <p> 번호 : <strong id="num"></strong></p>
+    <p> 이름 : <strong id="name"></strong></p>
+    <p> 주소 : <strong id="addr"></strong></p>
+    <script>
+        //서버에서 받아온 데이터라고 가정!
+        const data=`
+            {"num":1, "name":"김구라", "addr":"노량진"}
+        `;
+        //출력하기 버튼을 눌렀을때 data 에 있는 json 문자열을 활용해서
+        //회원 한명의 정보를 위의 strong 요소에 각각 출력되도록 프로그래밍 해 보세요.
+        document.querySelector("#printBtn").addEventListener("click",()=>{
+            const result = JSON.parse(data)
+            document.querySelector("#num").innerText = result.num
+            document.querySelector("#name").innerText = result.name
+            document.querySelector("#addr").innerText = result.addr
+
+        })
+    </script>
+</body>
+</html>
