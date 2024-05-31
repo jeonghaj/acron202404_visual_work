@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Array</h1>
+
+        <script>
+        
+            let array = [ 10, 11, 20, 22, 30, 33, 40, 50]
+            
+
+            let array1 =  array.filter((item)=>{
+                return item%10 == 0;
+            })
+            let array2 = array1.map((item)=>{
+                return item*10+"점";
+            })
+
+            let array3 = array
+            .filter(item => item%10==0)
+            .map(item => item*10+"점");
+
+        </script>
+
+    </body>
+    </html>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>ㅎㅇㅎㅇ</h1>
+    <div class="container">
+        <p id="count"></p>
+        <button id="startBtn">시작</button>
+        <button id="cancelBtn">취소</button>
+    </div>
+
+    <script>
+        let count = 0;
+        let intervalId;
+        let isRunning = false;
+
+        document.querySelector("#startBtn").addEventListener("click", () => {
+            if (isRunning) {
+                return;
+            }
+            isRunning = true;
+
+            intervalId = setInterval(() => {
+                count++
+                document.querySelector("#count").innerText = count;
+            }, 500)
+
+
+        })
+
+        document.querySelector("#cancelBtn").addEventListener("click",()=>{
+            clearInterval(intervalId);
+            count = 0;
+            isRunning = false;
+            document.querySelector("#count").innerText = count;
+        })
+
+
+    </script>
+</body>
+
+</html>
