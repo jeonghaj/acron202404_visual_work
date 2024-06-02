@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="containe">
+        <h1>문서요소를 필요한 시점에 만들어서 원하는 위치에 넣기</h1>
+        <input type="text" placeholder="할일입력" id="inputTodo">
+        <button id="addBtn1">추가하기1</button>
+        <button id="addBtn2">추가하기2</button>
+        <button id="addBtn3">추가하기3</button>
+        <button id="addBtn4">추가하기4</button>
+        <button id="addBtn5">추가하기5</button>
+    </div>
+    <ol>
+        
+    </ol>
+    <script>
+        //추가하기 버튼을 눌렀을때  
+        document.querySelector("#addBtn1").addEventListener("click",()=>{
+        //li 요소 만들기
+        let newline = document.createElement("li");
+        //입력한 문자열 읽어오기
+        let inputText = document.querySelector("#inputTodo").value
+        //li 요소의 innerText 로 읽어온 문자열 출력하기
+        newline.innerText = inputText
+        //ol의 자식요소로 li 요소를 추가하기
+        document.querySelector("ol").append(newline)
+        })
+
+        //추가하기 2 버튼을 눌렀을때 
+        document.querySelector("#addBtn2").addEventListener("click",()=>{
+            let newline = document.createElement("li")
+            newline.innerText = document.querySelector("#inputTodo").value
+            document.querySelector("ol").insertAdjacentElement("beforebegin",newline)
+        })
+
+        document.querySelector("#addBtn3").addEventListener("click",()=>{
+            let inputtext = document.querySelector("#inputTodo").value
+            let preparedHtml = `<li>${inputtext}</li>`
+            document.querySelector("ol").insertAdjacentHTML("afterbegin",preparedHtml)
+        })
+
+        document.querySelector("#addBtn4").addEventListener("click",()=>{
+            let inputtext = document.querySelector("#inputTodo").value;
+            let preparedHtml = `<li>${inputtext}</li>`
+            document.querySelector("ol").innerHTML = preparedHtml
+            
+        })
+        
+        document.querySelector("#addBtn5").addEventListener("click",()=>{
+                const msg = document.querySelector("#inputTodo").value;
+                const html = `<li>${msg}</li>`;
+                //기존에 존재하는 요소를 덮어쓰기 하면서 추가(실제 요소가 만들어진다)
+                //덮어쓰기때문에 1개만 출력됨
+                document.querySelector("ol").innerText = html;
+            })
+
+    </script>
+</body>
+</html>

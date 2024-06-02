@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="addBtn">추가하기</button>
+    <button id="addBtn2">추가하기2</button>
+    <table>
+        <thead>
+            <tr>
+                <td>번호</td>
+                <td>이름</td>
+                <td>주소</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+        <script>
+            const data = {num:1,name:"김구라",addr:"노량진"}
+
+            document.querySelector("#addBtn2").addEventListener("click",()=>{
+                const HTML = `
+                <tr>
+                    <td>${data.num}</td>
+                    <td>${data.name}</td>
+                    <td>${data.addr}</td>
+                </tr>
+                `
+                document.querySelector("tbody").insertAdjacentHTML("afterbegin",HTML)
+            })
+
+            document.querySelector("#addBtn").addEventListener("click",()=>{
+                const td1 = document.createElement("td")
+                const td2 = document.createElement("td")
+                const td3 = document.createElement("td")
+
+                td1.innerText = data.num
+                td2.innerText = data.name
+                td3.innerText = data.addr
+
+                const tr = document.createElement("tr")
+                tr.append(td1)
+                tr.append(td2)
+                tr.append(td3)
+
+                document.querySelector("tbody").append(tr)
+            }) 
+
+        </script>
+    </table>
+</body>
+
+</html>
