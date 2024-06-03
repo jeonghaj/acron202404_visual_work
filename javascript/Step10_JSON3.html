@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_JSON3.html</title>
+</head>
+<body>
+    <button id="printBtn">출력하기</button>
+    <button id="printBtn2">출력하기2</button>
+    <ul id="friends">
+        
+    </ul>
+    <script>
+        //서버로 부터 받아온 문자열이라고 가정 
+        const data=`["김구라","해골","원숭이","주뎅이","덩어리"]`;
+        /*
+            출력하기 버튼을 눌렀을때 ul 요소에 친구 목록을 출력해 보세요.
+            - 배열 모양의 json 도 JSON.parse() 함수를 이용하면 실제 배열로 만들수 있습니다.
+            - <li>김구라</li> 이런식으로 li 요소를 만들어서 문자열을 출력한후 ul 요소에 
+              추가 해야 합니다.
+        */
+        document.querySelector("#printBtn").addEventListener("click",()=>{
+            //JSON 문자열을 실제 배열로 만든다.
+            const names = JSON.parse(data);
+            names.forEach((item)=>{
+                // item 은 "김구라"  "해골" "원숭이" ....
+                //li 요소를 만들어서
+                const tmp = document.createElement("li");
+                //innerText 를 출력하고 
+                tmp.innerText = item;
+                // ul 에 추가한다. 
+                document.querySelector("#friends").append(tmp);
+            }) 
+        })
+
+        document.querySelector("#printBtn2").addEventListener("click",()=>{
+            //JSON 문자열을 실제 배열로 만든다
+            const names = JSON.parse(data);
+            names.forEach((item)=>{
+                //문자열로 li를 구성
+                const tmp=`<li>${item}</li>`
+                // html 형식의 문자열을 전달하면 알아서 해당 요소를 만들어서 추가해준다.
+                document.querySelector("#friends").insertAdjacentHTML("beforeend",tmp)
+            })
+    
+        })
+    </script>
+</body>
+</html>
