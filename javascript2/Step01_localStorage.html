@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="continer">
+        <h1>localStorage</h1>
+        <p>
+            웹브라우저에 문자열을 영구 저장할 수 있는 localStorage 사용해보기
+        </p>
+        <input type="text" id="inputName" placeholder="이름을 입력하세요..">
+        <button id="saveBtn">저장</button>
+        <button id="clearBtn">삭제</button>
+        <p id="name"></p>
+    </div>
+    <script>
+        document.querySelector("#clearBtn").addEventListener("click",()=>{
+            //delete 예약어를 이용해서 object 에 특정 key 값을 삭제할 수 있다
+            // delete localStorage.savedName;
+            delete localStorage["savedName"];
+        })
+
+        //localStorage 에 "savedNAme" 이라는 키값으로 젖아된 문자열이 있는지 읽어와본다.
+        const savedName = localStorage.savedName;
+        if(savedName != undefined){
+            document.querySelector("#name").innerText = savedName+"님 반갑습니다."
+        }else{
+            document.querySelector("#name").innerText = "저장된 이름이 없습니다."
+        }
+        document.querySelector("#saveBtn").addEventListener("click",()=>{
+            //입력한 이름을 읽어와서
+            const name = document.querySelector("#inputName").value;
+            //localStorage 에 savedName 이라는 키값으로 지정한다
+            localStorage.savedName = name;
+          //localStorage["savedName"] = name; // 위와같이 동작한다.-
+            alert("저장했습니다.")
+        })
+    </script>
+</body>
+</html>
