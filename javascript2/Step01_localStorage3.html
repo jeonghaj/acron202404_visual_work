@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step01_localStorage3.html</title>
+</head>
+<body>
+    <div class="container">
+        <h1>영어 사전 만들기</h1>
+        <input type="text" id="word" placeholder="단어 입력....">
+        <button id="findBtn">뜻 찾기</button>
+        <input type="text" id="mean" placeholder="뜻 입력....">
+        <button id="saveBtn">저장</button>
+        <button id="clearBtn">삭제</button>
+       
+        <!--외부 javascript 로딩-->
+        <script src="js/myutil.js"></script>
+        <script>
+            //localStorage 에 "dic"이라는 키값으로 저장된 값이 잇는지 읽어와 본다.
+            const dic = localStorage.dic;
+            //만일 없다면 
+            if(dic==undefined){
+                // "dic" 이라는 key 값으로 빈 JSON 문자열을 일단 넣어준다.
+                localStorage.dic = "{}";
+            }
+
+         $("#clearBtn").addEventListener("click",()=>{
+            // delete localStorage.dic;
+            localStorage.dic = "{}"
+         })
+        $("#findBtn").addEventListener("click",()=>{
+            //입력한 단어를 읽어와서
+            const word = $("#word").value;
+            //JSON 문자열을 object 로 변경한 후
+            const obj = JSON.parse(localStorage.dic);
+            //object 에서 뜻을 찾는다.
+            const mean = obj[word]
+            if(mean!=undefined){
+                $("#mean").value = mean
+            }else{
+                $("#mean").value = "저장된 단어가 없습니다."
+            }
+        })
+
+        $("#saveBtn").addEventListener("click",()=>{
+            //입력한 단어와 뜻을 읽어온다.
+            const word = $("#word").value;
+            const mean = $("#mean").value;
+            //localStorage 에 저장된 json 문자열을 읽어와서 실제 object 로 변경한다.
+            const obj = JSON.parse(localStorage.dic);
+            //object 에 단어와 뜻을 저장한다
+            obj[word] = mean
+            //object 를 문자열로 바꿔서 dic 이라는 키값으로 localStorage에 저장한다.
+            localStorage.dic = JSON.stringify(obj)
+            $("#word").value = ""
+            $("#mean").value = ""
+        })
+    </script>
+</body>
+</html>

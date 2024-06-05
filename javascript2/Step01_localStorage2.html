@@ -12,20 +12,18 @@
         <button id="findBtn">뜻 찾기</button>
         <input type="text" id="mean" placeholder="뜻 입력....">
         <button id="saveBtn">저장</button>
+        <button id="clearBtn">삭제</button>
        
+        <!--외부 javascript 로딩-->
+        <script src="js/myutil.js"></script>
         <script>
-        //매개변수로 전달된 선택자를 이용해서
-        function $(sel){
-        //해당 선택자에 부합하는 문서 개게의 참조값을 리턴하는 함수
-            return document.querySelector(sel);
-        }
-        function $$(sel){
-            return document.querySelectorAll(sel);
-        }
     //단어와 뜻을 입력하고 저장 버튼을 누르면 해당 정보를 localStorage 에 영구 저장 하도록
     //단어 하나가 아닌 여러개를 저장할 수 있어야 한다.
     //localStorage 를 활용해서 새로고침 해도 계속 저장되도록 해야한다.
     //단어를 key 값으로 뜻을 value 값으로 이용
+         $("#clearBtn").addEventListener("click",()=>{
+            localStorage.clear();
+         })
         $("#findBtn").addEventListener("click",()=>{
             //입력한 단어를 읽어와서
             const word = $("#word").value;
