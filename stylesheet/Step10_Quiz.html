@@ -24,7 +24,7 @@
 
 	//반복문 돌면서 이벤트 리스너 등록하기 
 	for(var i=0; i<links.length; i++){
-		links[i].addEventListener("click", function(){
+		links[i].addEventListener("click", function(e){
 			//일단 모두다 숨기기 
 			var navContents=document.querySelectorAll(".nav-content");
 
@@ -33,7 +33,7 @@
 			});
 
 			//이벤트가 일어난 a 요소의 href 속성 value 값 읽어오기 
-			var sel=this.getAttribute("href");
+			var sel=e.getAttribute("href");
 			console.log("sel:"+sel);
 			//읽어온 문자열을 선택자로 활용해서 보이게 하기 
 			document.querySelector(sel).style.display="block";
