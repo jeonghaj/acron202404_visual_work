@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_CardFlip.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+            width: 200px;
+            height: 200px;
+        }
+        .target{
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transition: transform 0.4s ease-out;
+        }
+        
+        .target > div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            backface-visibility: hidden;  /*  visible (default) | hidden */
+            /* 글자를 div 의 가운데 오도록 */
+            display: flex;
+            justify-content: center; /* 좌우로 가운데 정렬 */
+            align-items: center; /* 위 아래로 가운데 정렬 */
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .front{
+            background-color: red;
+        }
+        .back{
+            background-color: blue;
+            transform: rotateY(180deg);
+        }
+
+        .rotate{
+            transform: rotateY(180deg);
+        }
+    </style>    
+</head>
+<body>
+    <div class="container">
+        <h3>카드 Flip 예제</h3>
+        <div class="wrapper">
+            <div class="target" id="myCard">
+                <div class="front">front</div>
+                <div class="back">back</div>
+            </div> 
+        </div>
+        <button id="flipBtn">뒤집기</button>
+    </div> 
+    <script>
+        document.querySelector("#flipBtn").addEventListener("click", ()=>{
+            //#myCard div 의 참조값을 얻어와서 상수에 담아 놓고 사용하기 
+            const card=document.querySelector("#myCard");
+            //만일 rotate 클래스가 이미 존재한다면
+            if(card.classList.contains("rotate")){
+                // rotate 클래스를 제거하고 
+                card.classList.remove("rotate");
+            }else{//존재하지 않는다면
+                // rotate 클래스를 추가한다.
+                card.classList.add("rotate");
+            }
+        });
+    </script>   
+</body>
+</html>

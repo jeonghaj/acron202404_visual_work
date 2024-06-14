@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_Example.html</title>
+    <style>
+        @keyframes dropAni{
+            0%{
+                transform: translateY(-500px);
+            }
+            20%{
+                transform: translateY(0px);
+            }
+            40%{
+                transform: translateY(-100px);
+            }
+            60%{
+                transform: translateY(0px);
+            }
+            80%{
+                transform: translateY(-50px);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+        .drop{
+            animation: dropAni 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Animation 예제</h1>
+        <img class="drop" src="images/top01.jpg">
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Cube2.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .cube{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-200px);
+            transition: transform 1s ease-out;
+        }
+        .cube > div{
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        } 
+        .cube > div:nth-child(1){
+            transform: translateZ(200px);
+        }
+        .cube > div:nth-child(2){
+            transform: rotateY(90deg) translateZ(200px);
+        }
+        .cube > div:nth-child(3){
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        .cube > div:nth-child(4){
+            transform: rotateY(270deg) translateZ(200px);
+        }
+        .cube > div:nth-child(5){
+            transform: rotateX(90deg) translateZ(200px);
+        }
+        .cube > div:nth-child(6){
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d cube 테스트</h3>
+        <div class="wrapper">
+            <div class="cube">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>    
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>
+    <script>
+
+        // y 축 기준 회전하는 값을 저장할 변수 선언하고 초기값 0 대입
+        let rY=0;
+
+        document.querySelector("#leftBtn").addEventListener("click", ()=>{
+            rY -= 90;
+            document.querySelector(".cube")
+                .style.transform="translateZ(-200px) rotateY("+rY+"deg)";
+        });
+
+        document.querySelector("#rightBtn").addEventListener("click", ()=>{
+            rY += 90;
+            document.querySelector(".cube")
+                .style.transform=`translateZ(-200px) rotateY(${rY}deg)`;
+        });
+    </script>    
+</body>
+</html>

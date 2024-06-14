@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_flexUtil.html</title>
+    <style>
+        .container{
+            width: 80%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        .wrapper{
+            /* flex box 를 사용하겠다는 설정 */
+            display: flex;
+            background-color: #cecece;
+            border: 2px solid blue;
+            height: 500px;
+        }
+        .item{
+            background-color: yellow;
+            border: 1px dotted red;
+            cursor: pointer;
+        }
+
+        .tool{
+            display: flex;
+        }
+        .tool > div{
+            flex-basis: 50%;
+            border: 1px dotted blue;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>flex box 테스트 util</h1>
+        <div class="tool">
+            <div>
+                <h3>부모 div 에 적용할 값</h3>
+                height : <span id="currentWrapperHeight">500px</span>
+                <input type="range" id="wrapperHeight" value="500" max="500" min="100">
+                <br>
+                flex-direction:
+                <select id="flexDirection">
+                    <option selected>row</option>
+                    <option>row-reverse</option>
+                    <option>column</option>
+                    <option>column-reverse</option>
+                </select>
+                <br>
+                flex-wrap :
+                <select id="flexWrap">
+                    <option selected>nowrap</option>
+                    <option>wrap</option>
+                    <option>wrap-reverse</option>
+                </select>
+                <br>
+                justify-content :
+                <select id="justifyContent">
+                    <option selected>flex-start</option>
+                    <option>flex-end</option>
+                    <option>center</option>
+                    <option>space-between</option>
+                    <option>space-around</option>
+                    <option>space-evenly</option>
+                </select>
+                <br>
+                align-items : 
+                <select id="alignItems">
+                    <option selected>stretch</option>
+                    <option>flex-start</option>
+                    <option>flex-end</option>
+                    <option>center</option>
+                    <option>base-line</option>
+                </select>
+                <br>
+                align-content :
+                <select id="alignContent">
+                    <option selected>stretch</option>
+                    <option>flex-start</option>
+                    <option>flex-end</option>
+                    <option>center</option>
+                    <option>space-between</option>
+                    <option>space-around</option>
+                    <option>space-evenly</option>
+                </select>
+                <br>
+                row-gap : <input type="text" id="rowGap" value="0">
+                <br>
+                column-gap : <input type="text" id="columnGap" value="0">                
+            </div>
+            <div>
+                <h3>자식 item 에 적용할 값</h3>
+                <p> <strong id="selected"></strong> 번 아이템이 선택되었습니다</p>
+                align-self : 
+                <select id="alignSelf">
+                    <option selected>auto</option>
+                    <option>stretch</option>
+                    <option>flex-start</option>
+                    <option>flex-end</option>
+                    <option>center</option>
+                    <option>base-line</option>
+                </select>
+                <br>
+                order : <input type="text" id="order" value="0">
+                <br>
+                flex-grow : <input type="text" id="flexGrow" value="0">
+                <br>
+                flex-shrink : <input type="text" id="flexShrink" value="1">
+                <br>
+                flex-basis : <input type="text" id="flexBasis" value="auto">
+                <br>
+                <button id="applyAllBtn">모든 item 에 일괄적용</button>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">10</div>
+        </div>    
+    </div>
+    <script>
+        document.querySelector("#wrapperHeight").addEventListener("mousemove", function(){
+            document.querySelector(".wrapper").style.height=this.value+"px";
+            document.querySelector("#currentWrapperHeight").innerText=this.value+"px";
+        });
+        document.querySelector("#flexDirection").addEventListener("change", function(){
+            //select 된 value 값을 .wrapper 의 flex-direction 에 반영하기 
+            document.querySelector(".wrapper").style.flexDirection=this.value;
+        });
+        document.querySelector("#flexWrap").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.flexWrap=this.value;
+        });
+        document.querySelector("#justifyContent").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.justifyContent=this.value;
+        });
+        document.querySelector("#alignItems").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.alignItems=this.value;
+        });
+        document.querySelector("#alignContent").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.alignContent=this.value;
+        });
+        document.querySelector("#rowGap").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.rowGap=this.value;
+        });
+        document.querySelector("#columnGap").addEventListener("change", function(){
+            document.querySelector(".wrapper").style.columnGap=this.value;
+        });
+
+        //모든 아이템 div 의 참조값을 배열에 담기 
+        let items=document.querySelectorAll(".item");
+
+        let selectedItem;
+
+        //모든 아이템 div 에 이벤트 리스너 등록
+        items.forEach(function(item){
+            item.addEventListener("click", function(){
+                //클릭한 요소의 innerText 를 읽어와서 
+                let num=Number(this.innerText);
+                //출력하기 
+                document.querySelector("#selected").innerText=num;
+                //선택된 요소의 참조값을 변수에 담아두기
+                selectedItem=this;
+                //만일 선택된 요소에 align-self 값이 있다면 
+                if(this.style.alignSelf){
+                    //select 에도 반영하고 
+                    document.querySelector("#alignSelf").value=this.style.alignSelf;
+                }else{//없다면
+                    //default 값으로 변경
+                    document.querySelector("#alignSelf").value="auto";
+                }
+                if(this.style.order){
+                    document.querySelector("#order").value=this.style.order;
+                }else{
+                    document.querySelector("#order").value=0;
+                }
+                if(this.style.flexGrow){
+                    document.querySelector("#flexGrow").value=this.style.flexGrow;
+                }else{
+                    document.querySelector("#flexGrow").value=0;
+                }
+                if(this.style.flexShrink){
+                    document.querySelector("#flexShrink").value=this.style.flexShrink;
+                }else{
+                    document.querySelector("#flexShrink").value=1;
+                }
+                if(this.style.flexBasis){
+                    document.querySelector("#flexBasis").value=this.style.flexBasis;
+                }else{
+                    document.querySelector("#flexBasis").value="auto";
+                }
+            });
+        });
+
+
+        document.querySelector("#alignSelf").addEventListener("change", function(){
+            selectedItem.style.alignSelf=this.value;
+        });
+
+        document.querySelector("#order").addEventListener("change", function(){
+            selectedItem.style.order=this.value;
+        });
+        document.querySelector("#flexGrow").addEventListener("change", function(){
+            selectedItem.style.flexGrow=this.value;
+        });
+        document.querySelector("#flexShrink").addEventListener("change", function(){
+            selectedItem.style.flexShrink=this.value;
+        });
+        document.querySelector("#flexBasis").addEventListener("change", function(){
+            selectedItem.style.flexBasis=this.value;
+        });
+        document.querySelector("#applyAllBtn").addEventListener("click", function(){
+            items.forEach(function(item){
+                item.style.alignSelf=document.querySelector("#alignSelf").value;
+                item.style.order=document.querySelector("#order").value;
+                item.style.flexGrow=document.querySelector("#flexGrow").value;
+                item.style.flexShrink=document.querySelector("#flexShrink").value;
+                item.style.flexBasis=document.querySelector("#flexBasis").value;
+            });
+        });
+    </script>
+</body>
+</html>

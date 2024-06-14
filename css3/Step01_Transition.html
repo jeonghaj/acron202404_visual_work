@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step01_transition.html</title>
+    <style>
+       .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            cursor: pointer;
+            /* css 가 변경되는 중간 과정을 보여주기 위한 css 속성 */
+            /* transition: all 1s linear;   이표현은 아래의 3줄을 줄인 표현이다. */
+            transition-property: all;
+            transition-duration: 1s;
+            transition-timing-function: linear;
+       }
+       .box:hover{
+            width: 200px;
+            height: 200px;
+            border-width: 10px;
+            margin-left: 100px;
+        } 
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>transition 테스트</h1>
+        <div class="box"></div>
+    </div>
+</body>
+</html>

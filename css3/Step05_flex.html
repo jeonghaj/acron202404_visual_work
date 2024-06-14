@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_flex.html</title>
+    <style>
+        .box{
+            width: 100px;
+           
+            border: 1px solid red;
+            background-color: yellow;
+        }
+        .wrapper{
+            border: 1px solid blue;
+            height: 500px;
+            background-color: antiquewhite;
+            /* 자식요소를 일렬로 배치 */
+            display: flex;
+
+            /* 
+                자식 요소들이 일렬로 배치되는 순서와 축(가로 or 세로)을 결정할수 있다
+                row | row-reverse | column | column-reverse 
+            */
+            flex-direction: row;
+            /* 
+                컨테이너가 더 이상 아이템들을 한 줄에 담을 여유 공간이 없을 때
+                아이템 줄바꿈을 어떻게 할지 결정하는 속성 
+                nowrap | wrap | wrap-reverse
+            */
+            flex-wrap: nowrap;
+            /*
+                main 축 방향으로의 정렬 
+                flex-start | flex-end | center | space-between | space-around | space-evenly 
+            */
+            justify-content: flex-start;
+            /*
+                main 축의 수직인 축에 대한 정렬
+                stretch | flex-start | flex-end | center | baseline
+            */
+            align-items: center;
+            /*
+                flex-wrap 속성의 값이 wrap 또는 wrap-reverse 이면 
+                main 축을 따라서 아이템이 한줄이 아닌 두줄 이상이 될수도 있다. 
+                두줄 이상인 경우에 해당 줄을 main 축에 수직인 축에 대해서 
+                어떻게 배치할것인지도 정해야 한다. 
+                이 속성은 flex-wrap 속성의 값이 nowrap 이면 의미가 없다 
+                stretch | flex-start | flex-end | center | space-between | space-around
+            */
+            align-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>블럭요소를 가로로 배치하는 테스트</h1>
+        <div class="wrapper">
+            <div class="box">div1</div>
+            <div class="box">div2</div>
+            <div class="box">div3</div>
+            <div class="box">div4</div>
+            <div class="box">div5</div>
+            <div class="box">div6</div>
+            <div class="box">div7</div>
+            <div class="box">div8</div>
+            <div class="box">div9</div>
+            <div class="box">div10</div>
+        </div>
+    </div>
+</body>
+</html>

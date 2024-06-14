@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step02_Transform4.html</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            cursor: pointer;
+            background-color: yellow;
+            /* 
+                transform 을 적용할때 0.4 초 동안에 순차적으로 적용을 해라 
+                ease-out 마지막을 부드럽게(천천히) 변하게 
+            */
+            transition: transform 0.4s ease-out;
+        }
+        .move{
+            transform: translateX(50px) translateY(50px) rotate(45deg) scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>transform 테스트</h1>
+        <input type="number"  min="1" max="10" value="5" @change="onChange">
+        <button @click="onReset">리셋</button>
+        <div class="box" v-for="item, index in boxes" :class="item" @click="onBoxClick(index)"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //Step02_Transform2.html 예제와 동일한 동작을 하도록 vue js 를 활용해서 프로그래밍 해보세요
+        new Vue({
+            el:"#app",
+            mounted(){
+                this.boxes=this.getArray();
+            },
+            data:{
+                boxCount:5,
+                boxes:[]
+            },
+            methods:{
+                onChange(e){
+                    this.boxCount=e.target.value;
+                    this.boxes=this.getArray();
+                },
+                getArray(){
+                    const arr=[];
+                    for(let i=0; i<this.boxCount; i++){
+                        arr[i]={move:false};
+                    }
+                    return arr;
+                },
+                onReset(){
+                    //모델을 모두다 false 가 들어 있는 새로운 배열로 덮어쓰기 => 모델변경 => UI 업데이트
+                    this.boxes=this.getArray();
+                },
+                onBoxClick(i){
+                    const newArray=this.boxes.map((item, index)=>{
+                        //만일 수정해야 하는 아이템이라면
+                        if(index === i){
+                            item.move=true;
+                        }
+                        return item;
+                    });
+                    this.boxes=newArray;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

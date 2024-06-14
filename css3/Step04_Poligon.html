@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Poligon.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+            height: 700px;
+            border: 1px dotted green;
+            display: flex;
+            align-items: center;
+        }
+        .poligon{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transition: transform 1s ease-out;
+        }
+        .poligon > div{
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+            backface-visibility: visible;
+        } 
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d poligon 테스트</h3>
+        <div class="wrapper">
+            <div class="poligon">
+                 
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>
+    <script>
+        //n 각형의 폭을 함수에 전달하면 div 를 배치할때 rotateY 값과 translateZ 가 Object 로 리턴되는 함수 
+        function getAngleNtz(n, width) {
+            var angle = Math.round(360 / n);
+            var tz = Math.round((width / 2) / Math.tan((angle * Math.PI) / (2 * 180)));
+            var obj = {
+                angle: angle,
+                tz: tz
+            };
+            return obj;
+        }
+
+        //n각형
+        const n=8;
+        //div 의 width
+        const width=400;
+        // 6 각형 폭은 400px 인 경우 
+        const obj=getAngleNtz(n, width);
+        //배치하면서 회전시킬 각도
+        const angle=obj.angle;
+        //배치하면서 z 축 방향으로 평행이동 해야 하는 값
+        const tz=obj.tz;
+
+
+        // 만들어야 할 div 가 n 개 이기 때문에 반복문 n번 돌기
+        for(let i=0; i<n; i++){
+            //div 를 만들어서 
+            const div=document.createElement("div");
+            //innerText 를 출력하고 
+            div.innerText=i+1;
+            //.poligon 에 추가하기
+            document.querySelector(".poligon").append(div);
+        }
+        
+        document.querySelector(".poligon").style.transform="translateZ(-"+tz+"px)";
+
+        // .poligon 안에 있는 모든 div 의 참조값을 배열로 얻어내기
+        const divs=document.querySelectorAll(".poligon div");
+
+        //반복문 돌면서 모든 div 에 transform 적용하기
+        for(let i=0; i<divs.length; i++){
+            let rotate = i*angle;
+            divs[i].style.transform="rotateY("+rotate+"deg) translateZ("+tz+"px)";
+        }
+
+        // y 축 기준 회전하는 값을 저장할 변수 선언하고 초기값 0 대입
+        let rY=0;
+
+        document.querySelector("#leftBtn").addEventListener("click", ()=>{
+            rY -= angle;
+            document.querySelector(".poligon")
+                .style.transform="translateZ(-"+tz+"px) rotateY("+rY+"deg)";
+        });
+
+        document.querySelector("#rightBtn").addEventListener("click", ()=>{
+            rY += angle;
+            document.querySelector(".poligon")
+                .style.transform=`translateZ(-${tz}px) rotateY(${rY}deg)`;
+        });
+    </script>    
+</body>
+</html>

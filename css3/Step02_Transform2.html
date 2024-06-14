@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step02_Transform2.html</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            cursor: pointer;
+            background-color: yellow;
+            /* 
+                transform 을 적용할때 0.4 초 동안에 순차적으로 적용을 해라 
+                ease-out 마지막을 부드럽게(천천히) 변하게 
+            */
+            transition: transform 0.4s ease-out;
+        }
+        .move{
+            transform: translateX(50px) translateY(50px) rotate(45deg) scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>transform 테스트</h1>
+        <button id="resetBtn">리셋</button>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <script>
+        // click 한 div 에만 move 클래스를 추가 되도록 프로그래밍해 보세요
+
+        //1. 모든 div (5개의 div) 에  "click" 이벤트 리스너 함수 등록
+        document.querySelectorAll(".box").forEach((item)=>{
+            item.addEventListener("click", (e)=>{
+                //2. 이벤트가 발생한 요소에만 move 클래스 추가하기
+                e.target.classList.add("move");
+            });
+        });
+
+        //리셋버튼을 눌렀을때 실행할 함수 등록 
+        document.querySelector("#resetBtn").addEventListener("click", ()=>{
+            //.box div 에 추가된 move 클래스를 모두 제거하기 
+            document.querySelectorAll(".box").forEach((item)=>{
+                item.classList.remove("move");
+            });
+        });
+    </script>
+</body>
+</html>
