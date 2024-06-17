@@ -34,6 +34,16 @@
         <button id="startBtn">start</button>
     </div>
     <script>
+        /*
+            어떤 요소의 클래스 속성 추가, 제거 하는 방법
+            -클래스 추가
+            참조값.classList.add("클래스명")
+            -클래스 제거
+            참조값.classList.remove("클래스명")
+            -클래스 토글 (있으면 제거, 없으면 추가)
+            참조값.classList.toggle("클래스명")
+        
+        */
         document.querySelector("#startBtn").addEventListener("click", function(){
             //클래스가 box 인 모든 div 를 선택해서 동작하기
             document.querySelectorAll(".box").forEach(function(item){
