@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //검증할 문자열
+        const source = "Hello, world!";
+        //정규표현식 객체
+        const reg = /Hello/;
+        const reg2 = new RegExp("Hello");
+
+        //검증할 문자열이 정규표현식과 매칭 되는지 여부(일치하는 문자열이 하나라도 있는지 여부)
+        const result = reg.test(source);
+        const result2 = reg2.test(source);
+    </script>
+</body>
+</html>

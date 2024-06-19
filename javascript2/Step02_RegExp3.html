@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        문자열 <input type="text" id="source" placeholder="검증할 문자열 입력...">
+        <br>
+        정규표현식 <input type="text" id="expression" placeholder="정규표현식 입력...">
+        <br>
+        <button id="testBtn">매칭 여부 확인하기</button>
+        <p>결과 : <strong id="result"></strong></p>
+        <p>찾은 문자열 : <strong id="result2"></strong></p>
+        <button id="findAllBtn">매칭되는 문자열 모두 찾기</button>
+        <ul>
+            
+        </ul>
+    </div> 
+    <script>
+        document.querySelector("#findAllBtn").addEventListener("click",()=>{
+            //입력한 문자열과 정규 표현식 읽어온다.
+            const source=document.querySelector("#source").value
+            const expression=document.querySelector("#expression").value
+            //정규 표현식 객체를 생성
+            //RegExp 객체의 생성자의 두번째 인자에 global 옵션의 약자인 "g"를 전달해야
+            //매칭되는 모든 문자열을 찾아낼 수 있다
+            //"g" => global (전역에서 찾겠다.)
+            //"i" => ignore case (대소문자 가리지 않음)
+            //"gi" => global + ignore case
+            const reg = new RegExp(expression,"g")
+            //반복문
+            while(true){
+                //앞에서 부터 순서대로 찾는다
+                const result = reg.exec(source);
+                //더이상 찾을게 없으면 반복문 탈출
+                if(result == null)break;
+                const li = `<li>${result[0]}</li>`;
+                document.querySelector("ul").insertAdjacentHTML("beforeend",li)
+            }
+        })
+    
+
+
+    </script>
+</body>
+</html>

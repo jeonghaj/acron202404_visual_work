@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript2/Step02_RegExp2.html</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #607fe2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #56ac5a;
+        }
+
+        p {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        문자열 <input type="text" id="source" placeholder="검증할 문자열 입력...">
+        <br>
+        정규표현식 <input type="text" id="expression" placeholder="정규표현식 입력...">
+        <br>
+        <button id="testBtn">매칭 여부 확인하기</button>
+        <p>결과 : <strong id="true"></strong></p>
+        <p>찾은 문자열 : <strong id="find"></strong></p>
+    </div> 
+    <script>
+        document.querySelector("#testBtn").addEventListener("click",()=>{
+            const source = document.querySelector("#source").value
+            const exp = document.querySelector("#expression").value
+            const reg = new RegExp(exp);
+            const result = reg.test(source);
+            document.querySelector("#true").innerText = result;
+            //정규 표현식 객체의 exec() 함수를 호출하면서 문자열을 넣어주면 매칭되는 문자열을
+            //배열에 담아서 리턴해준다.
+            const result2 = reg.exec(source);
+            console.log(result2)
+            //배열의 0번방에 문자열이 들어 있다.
+            document.querySelector("#find").innerText = result2
+            
+
+        })
+
+    </script>
+</body>
+</html>
